@@ -1,0 +1,45 @@
+services:
+  comfy:
+    image: comfy_simple
+    build:
+      context: . 
+    ports:
+      - "8188:8188"
+    volumes:
+      - ./models/diffusion_models:/ComfyUI/models/diffusion_models
+      - ./models/controlnet:/ComfyUI/models/controlnet
+      - ./models/upscale_models:/ComfyUI/models/upscale_models
+      - ./models/photomaker:/ComfyUI/models/photomaker
+      - ./models/embeddings:/ComfyUI/models/embeddings
+      - ./models/checkpoints:/ComfyUI/models/checkpoints
+      - ./models/style_models:/ComfyUI/models/style_models
+      - ./models/clip:/ComfyUI/models/clip
+      - ./models/hypernetworks:/ComfyUI/models/hypernetworks
+      - ./models/diffusers:/ComfyUI/models/diffusers
+      - ./models/vae:/ComfyUI/models/vae
+      - ./models/gligen:/ComfyUI/models/gligen
+      - ./models/unet:/ComfyUI/models/unet
+      - ./models/clip_vision:/ComfyUI/models/clip_vision
+      - ./models/vae_approx:/ComfyUI/models/vae_approx
+      - ./models/loras:/ComfyUI/models/loras
+
+
+
+      - ./output:/ComfyUI/output
+      - ./input:/ComfyUI/input
+
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all 
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ['0']
+              capabilities: [gpu]
+    command: ["python3", "/ComfyUI/main.py", "--listen"] 
+
+volumes:
+  app:
+    driver: local
+
