@@ -23,8 +23,6 @@ services:
       - ./models/vae_approx:/ComfyUI/models/vae_approx
       - ./models/loras:/ComfyUI/models/loras
 
-
-
       - ./output:/ComfyUI/output
       - ./input:/ComfyUI/input
 

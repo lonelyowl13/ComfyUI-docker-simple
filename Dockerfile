@@ -12,7 +12,8 @@ RUN git clone https://github.com/comfyanonymous/ComfyUI.git /ComfyUI
 
 WORKDIR /ComfyUI
 
-VOLUME ["/ComfyUI/models/diffusion_models", \
+VOLUME [ \
+    "/ComfyUI/models/diffusion_models", \
     "/ComfyUI/models/controlnet", \
     "/ComfyUI/models/upscale_models", \ 
     "/ComfyUI/models/photomaker", \
