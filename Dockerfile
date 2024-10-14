@@ -28,7 +28,9 @@ VOLUME [ \
     "/ComfyUI/models/unet", \
     "/ComfyUI/models/clip_vision", \
     "/ComfyUI/models/vae_approx", \
-    "/ComfyUI/models/loras" \
+    "/ComfyUI/models/loras", \
+    "/ComfyUI/input", \
+    "/ComfyUI/output" \
     ]
 
 RUN pip3 install --upgrade pip \
