@@ -10,6 +10,9 @@ services:
       - ./custom_nodes/:/ComfyUI/custom_nodes/
       - ./output:/ComfyUI/output
       - ./input:/ComfyUI/input
+      - ./my_workflows:/ComfyUI/my_workflows
+      - ./ComfyUI_temp:/ComfyUI_temp
+      - ./comfyui.log:/ComfyUI/comfyui.log
 
     environment:
       - NVIDIA_VISIBLE_DEVICES=all 

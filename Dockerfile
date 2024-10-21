@@ -16,8 +16,10 @@ VOLUME [ \
     "/ComfyUI/models", \
     "/ComfyUI/input", \
     "/ComfyUI/output", \
-    "/ComfyUI/custom_nodes" \
-    ]
+    "/ComfyUI/custom_nodes", \
+    "/ComfyUI/my_workflows", \
+    "/ComfyUI_temp" \
+  ] 
 
 RUN pip3 install --upgrade pip \
     && pip3 install -r requirements.txt
@@ -29,6 +31,9 @@ COPY ./cmd.sh /
 
 RUN chmod +x /cmd.sh
 
+COPY ./nodes_download.bash /
+
+RUN bash /nodes_download.bash
 
 RUN cp -TR "/ComfyUI/models" /tmp_models
 RUN cp -TR "/ComfyUI/input" /tmp_input
