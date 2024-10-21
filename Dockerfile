@@ -13,24 +13,10 @@ RUN git clone https://github.com/comfyanonymous/ComfyUI.git /ComfyUI
 WORKDIR /ComfyUI
 
 VOLUME [ \
-    "/ComfyUI/models/diffusion_models", \
-    "/ComfyUI/models/controlnet", \
-    "/ComfyUI/models/upscale_models", \ 
-    "/ComfyUI/models/photomaker", \
-    "/ComfyUI/models/embeddings", \
-    "/ComfyUI/models/checkpoints", \
-    "/ComfyUI/models/style_models", \
-    "/ComfyUI/models/clip", \
-    "/ComfyUI/models/hypernetworks", \
-    "/ComfyUI/models/diffusers", \
-    "/ComfyUI/models/vae", \
-    "/ComfyUI/models/gligen", \
-    "/ComfyUI/models/unet", \
-    "/ComfyUI/models/clip_vision", \
-    "/ComfyUI/models/vae_approx", \
-    "/ComfyUI/models/loras", \
+    "/ComfyUI/models", \
     "/ComfyUI/input", \
-    "/ComfyUI/output" \
+    "/ComfyUI/output", \
+    "/ComfyUI/custom_nodes" \
     ]
 
 RUN pip3 install --upgrade pip \
@@ -39,4 +25,14 @@ RUN pip3 install --upgrade pip \
 ENV PATH /usr/local/cuda/bin:${PATH}
 ENV LD_LIBRARY_PATH /usr/local/cuda/lib64:${LD_LIBRARY_PATH}
 
-CMD ["python3", "/ComfyUI/main.py", "--listen"]
+COPY ./cmd.sh /
+
+RUN chmod +x /cmd.sh
+
+
+RUN cp -TR "/ComfyUI/models" /tmp_models
+RUN cp -TR "/ComfyUI/input" /tmp_input
+RUN cp -TR "/ComfyUI/output" /tmp_output
+RUN cp -TR "/ComfyUI/custom_nodes" /tmp_custom_nodes
+
+CMD /cmd.sh
