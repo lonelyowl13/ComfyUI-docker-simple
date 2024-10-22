@@ -2,3 +2,5 @@ custom_nodes
 input
 output
 models
+my_workflows
+ComfyUI_temp
