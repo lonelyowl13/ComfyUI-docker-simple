@@ -1,6 +1,6 @@
 services:
   comfy:
-    image: comfy_simple
+    image: ghcr.io/lonelyowl13/comfy_simple:latest
     build:
       context: . 
     ports:
