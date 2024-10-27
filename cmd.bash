@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 cp -r --update /tmp_models/* /ComfyUI/models
 cp -r --update /tmp_input/* /ComfyUI/input
@@ -12,5 +12,8 @@ chown -R 1000:1000 /ComfyUI/custom_nodes
 chown -R 1000:1000 /ComfyUI/my_workflows
 chown -R 1000:1000 /ComfyUI_temp
 
+python3 -m virtualenv --system-site-packages /venv 
+
+source /venv/bin/activate
 
 python3 /ComfyUI/main.py --listen --temp-directory /ComfyUI_temp

@@ -7,6 +7,7 @@ NODES=(
   "https://github.com/ciri/comfyui-model-downloader.git comfyui-model-downloader"
   "https://github.com/11cafe/comfyui-workspace-manager.git comfyui-workspace-manager"
   "https://github.com/ltdrdata/ComfyUI-Manager.git ComfyUI-Manager"
+  "https://github.com/ssitu/ComfyUI_UltimateSDUpscale.git ComfyUI_UltimateSDUpscale"
 )
 
 # Node install function
