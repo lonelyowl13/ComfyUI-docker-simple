@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
     build-essential \
-    libgl1-nvidia-glx \
+    libgl1 \
     && rm -rf /var/lib/apt/lists/*
 
 
