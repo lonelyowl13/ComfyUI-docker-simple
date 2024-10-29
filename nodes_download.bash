@@ -21,7 +21,7 @@ clone_and_install() {
 
     if [ ! -d "$name" ] || [ -z "$(ls -A "$name")" ]; then
       echo "Cloning $name..."
-      git clone "$url" "$name"
+      git clone --recurse-submodules "$url" "$name"
 
       if [ -f "$name/requirements.txt" ]; then
         echo "Installing requirements for $name..."
