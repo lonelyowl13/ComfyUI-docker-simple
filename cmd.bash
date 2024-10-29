@@ -12,7 +12,7 @@ chown -R 1000:1000 /ComfyUI/custom_nodes
 chown -R 1000:1000 /ComfyUI/my_workflows
 chown -R 1000:1000 /ComfyUI_temp
 
-python3 -m virtualenv --system-site-packages /venv 
+python3 /create_venv.py
 
 source /venv/bin/activate
 

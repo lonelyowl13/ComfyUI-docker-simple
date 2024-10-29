@@ -43,4 +43,6 @@ RUN cp -TR "/ComfyUI/input" /tmp_input
 RUN cp -TR "/ComfyUI/output" /tmp_output
 RUN cp -TR "/ComfyUI/custom_nodes" /tmp_custom_nodes
 
+COPY ./create_venv.py /
+
 CMD /cmd.bash
