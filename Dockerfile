@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y \
     python3-pip \
     build-essential \
     libgl1 \
+    libglib2.0-0 \
     && rm -rf /var/lib/apt/lists/*
 
 
@@ -31,10 +32,6 @@ RUN pip3 install -r requirements.txt
 ENV PATH /usr/local/cuda/bin:${PATH}
 ENV LD_LIBRARY_PATH /usr/local/cuda/lib64:${LD_LIBRARY_PATH}
 
-COPY ./cmd.bash /
-
-RUN chmod +x /cmd.bash
-
 COPY ./nodes_download.bash /
 
 RUN bash /nodes_download.bash
@@ -44,6 +41,12 @@ RUN cp -TR "/ComfyUI/input" /tmp_input
 RUN cp -TR "/ComfyUI/output" /tmp_output
 RUN cp -TR "/ComfyUI/custom_nodes" /tmp_custom_nodes
 
-COPY ./create_venv.py /
+COPY ./create_venv.bash /
+
+RUN chmod +x /create_venv.bash
+
+COPY ./cmd.bash /
+
+RUN chmod +x /cmd.bash
 
 CMD /cmd.bash
