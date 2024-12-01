@@ -1,6 +1,6 @@
 services:
   comfy:
-    image: comfy_simple
+    image: ghcr.io/lonelyowl13/comfy_simple:latest
     build:
       context: . 
     ports:
@@ -13,6 +13,7 @@ services:
       - ./my_workflows:/ComfyUI/my_workflows
       - ./ComfyUI_temp:/ComfyUI_temp
       - ./comfyui.log:/ComfyUI/comfyui.log
+      - ./venv:/venv
 
     environment:
       - NVIDIA_VISIBLE_DEVICES=all 
@@ -23,7 +24,7 @@ services:
             - driver: nvidia
               device_ids: ['0']
               capabilities: [gpu]
-    command: ["/cmd.sh"] 
+    command: ["/cmd.bash"] 
 
 volumes:
   app:

@@ -1,10 +1,12 @@
-FROM nvidia/cuda:12.6.1-cudnn-runtime-ubuntu20.04
+FROM nvidia/cuda:12.6.2-cudnn-runtime-ubuntu22.04
 
 RUN apt-get update && apt-get install -y \
     git \
     python3 \
     python3-pip \
     build-essential \
+    libgl1 \
+    libglib2.0-0 \
     && rm -rf /var/lib/apt/lists/*
 
 
@@ -18,18 +20,17 @@ VOLUME [ \
     "/ComfyUI/output", \
     "/ComfyUI/custom_nodes", \
     "/ComfyUI/my_workflows", \
-    "/ComfyUI_temp" \
-  ] 
+    "/ComfyUI_temp", \
+    "/venv" \
+  ]
 
-RUN pip3 install --upgrade pip \
-    && pip3 install -r requirements.txt
+RUN pip3 install --upgrade pip
+RUN pip3 install virtualenv
+
+RUN pip3 install -r requirements.txt
 
 ENV PATH /usr/local/cuda/bin:${PATH}
 ENV LD_LIBRARY_PATH /usr/local/cuda/lib64:${LD_LIBRARY_PATH}
-
-COPY ./cmd.sh /
-
-RUN chmod +x /cmd.sh
 
 COPY ./nodes_download.bash /
 
@@ -40,4 +41,12 @@ RUN cp -TR "/ComfyUI/input" /tmp_input
 RUN cp -TR "/ComfyUI/output" /tmp_output
 RUN cp -TR "/ComfyUI/custom_nodes" /tmp_custom_nodes
 
-CMD /cmd.sh
+COPY ./create_venv.bash /
+
+RUN chmod +x /create_venv.bash
+
+COPY ./cmd.bash /
+
+RUN chmod +x /cmd.bash
+
+CMD /cmd.bash
